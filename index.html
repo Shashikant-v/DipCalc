@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dip Calculator</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#2196f3">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            text-align: center;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .input-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .button-group {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            flex: 1;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .result {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9f7ef;
+            border-radius: 4px;
+            display: none;
+        }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 30px;
+        }
+        .data-table th, .data-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .data-table th {
+            background-color: #f2f2f2;
+        }
+        .data-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+<body>
+  
+  <h1>Fuel Tank Dip Calculator</h1>
+    <div class="calculator">
+        <div class="input-group">
+            <label for="dip">Enter Dip Measurement (cm):</label>
+            <input type="number" id="dip" step="0.1" min="0" max="54">
+        </div>
+        <div class="button-group">
+            <button onclick="calculate('Manan')">Manan (150L)</button>
+            <button onclick="calculate('Chauhan')">Chauhan Dem (200L)</button>
+        </div>
+        
+        <div id="result" class="result"></div>
+        
+        <table class="data-table">
+            <tr>
+                <th colspan="3">Phagwada Hosiyarpur Pathways Pvt. Ltd.</th>
+            </tr>
+            <tr>
+                <th colspan="3">S.Tank Dip Chart In Cm./Ltr By Gauge down side on Jali</th>
+            </tr>
+            <tr>
+                <th>Dip (cm)</th>
+                <th>Liters (Ltr)</th>
+                <th>Remarks</th>
+            </tr>
+            <tr>
+                <td>1-3</td>
+                <td>Dry</td>
+                <td>No fuel</td>
+            </tr>
+            <tr>
+                <td>4</td>
+                <td>1</td>
+                <td>Minimal fuel</td>
+            </tr>
+            <tr>
+                <td>52</td>
+                <td>270</td>
+                <td>Jaali paar (Auto cut Khuti Touch)</td>
+            </tr>
+            <tr>
+                <td>53</td>
+                <td>292</td>
+                <td>Near Full</td>
+            </tr>
+            <tr>
+                <td>54</td>
+                <td>315</td>
+                <td>Tank Full</td>
+            </tr>
+        </table>
+    </div>
+
+  
+  
+  <script>
+        // Dip chart data
+        const dipChart = [
+            {cm: 1, ltr: 0, remark: "Dry"},
+            {cm: 2, ltr: 0, remark: "Dry"},
+            {cm: 3, ltr: 0, remark: "Dry"},
+            {cm: 4, ltr: 1, remark: "Minimal fuel"},
+            {cm: 5, ltr: 3},
+            {cm: 6, ltr: 5},
+            {cm: 7, ltr: 7},
+            {cm: 8, ltr: 10},
+            {cm: 9, ltr: 14},
+            {cm: 10, ltr: 19},
+            {cm: 11, ltr: 24},
+            {cm: 12, ltr: 30},
+            {cm: 13, ltr: 36},
+            {cm: 14, ltr: 42},
+            {cm: 15, ltr: 48},
+            {cm: 16, ltr: 54},
+            {cm: 17, ltr: 60},
+            {cm: 18, ltr: 66},
+            {cm: 19, ltr: 72},
+            {cm: 20, ltr: 78},
+            {cm: 21, ltr: 84},
+            {cm: 22, ltr: 90},
+            {cm: 23, ltr: 96},
+            {cm: 24, ltr: 102},
+            {cm: 25, ltr: 108},
+            {cm: 26, ltr: 114},
+            {cm: 27, ltr: 120},
+            {cm: 28, ltr: 126},
+            {cm: 29, ltr: 132},
+            {cm: 30, ltr: 138},
+            {cm: 31, ltr: 144},
+            {cm: 32, ltr: 150},
+            {cm: 33, ltr: 156},
+            {cm: 34, ltr: 162},
+            {cm: 35, ltr: 168},
+            {cm: 36, ltr: 174},
+            {cm: 37, ltr: 180},
+            {cm: 38, ltr: 186},
+            {cm: 39, ltr: 192},
+            {cm: 40, ltr: 198},
+            {cm: 41, ltr: 204},
+            {cm: 42, ltr: 210},
+            {cm: 43, ltr: 216},
+            {cm: 44, ltr: 222},
+            {cm: 45, ltr: 228},
+            {cm: 46, ltr: 234},
+            {cm: 47, ltr: 240},
+            {cm: 48, ltr: 246},
+            {cm: 49, ltr: 252},
+            {cm: 50, ltr: 258},
+            {cm: 51, ltr: 264},
+            {cm: 52, ltr: 270, remark: "Jaali paar (Auto cut Khuti Touch)"},
+            {cm: 53, ltr: 292, remark: "Near Full"},
+            {cm: 54, ltr: 315, remark: "Tank Full"}
+        ];
+
+        function calculate(tankType) {
+            const dipInput = parseFloat(document.getElementById('dip').value);
+            const resultDiv = document.getElementById('result');
+            const tankCapacity = tankType === 'Manan' ? 150 : 200;
+
+            if (isNaN(dipInput) || dipInput < 0 || dipInput > 54) {
+                resultDiv.innerHTML = "Please enter a valid dip measurement between 0 and 54 cm.";
+                resultDiv.style.display = "block";
+                resultDiv.style.backgroundColor = "#ffebee";
+                return;
+            }
+
+            // Find the nearest lower and higher points in the chart
+            let lower = null;
+            let higher = null;
+            
+            for (let i = 0; i < dipChart.length; i++) {
+                if (dipChart[i].cm <= dipInput) {
+                    lower = dipChart[i];
+                }
+                if (dipChart[i].cm >= dipInput) {
+                    higher = dipChart[i];
+                    break;
+                }
+            }
+
+            // Calculate current diesel level
+            let currentLiters;
+            if (lower && lower.cm === dipInput) {
+                currentLiters = lower.ltr;
+            } else if (dipInput < 4) {
+                currentLiters = 0;
+            } else {
+                // Linear interpolation for values between known points
+                currentLiters = lower.ltr + (higher.ltr - lower.ltr) * (dipInput - lower.cm) / (higher.cm - lower.cm);
+                currentLiters = Math.round(currentLiters * 10) / 10; // Round to 1 decimal place
+            }
+
+            // Calculate diesel needed to fill the tank
+            const dieselNeeded = tankCapacity - currentLiters;
+
+            // Display results
+            let message = `For <strong>${tankType} (${tankCapacity}L)</strong> at <strong>${dipInput} cm</strong>:<br>`;
+            message += `Current Diesel Level: <strong>${currentLiters} liters</strong><br>`;
+            message += `Diesel Required: <strong>${dieselNeeded > 0 ? dieselNeeded.toFixed(1) : 0} liters</strong><br>`;
+            message += `Stock to Fill: <strong>${tankCapacity} liters</strong>`;
+
+            if (lower && lower.remark) {
+                message += `<br>Remarks: ${lower.remark}`;
+            } else if (dipInput >= 51.5 && dipInput < 52.5) {
+                message += `<br>Note: Approaching Jaali paar (Auto cut at 52 cm / 270 liters)`;
+            } else if (dipInput >= 52.5 && dipInput < 53.5) {
+                message += `<br>Note: Approaching Tank Full (54 cm / 315 liters)`;
+            }
+
+            resultDiv.innerHTML = message;
+            resultDiv.style.display = "block";
+            resultDiv.style.backgroundColor = "#e9f7ef";
+        }
+    </script>
+  
+  <script>
+    if ('serviceWorker' in navigator) {
+      navigator.serviceWorker.register('service-worker.js')
+        .then(function(registration) {
+          console.log('Service Worker Registered!', registration);
+        })
+        .catch(function(error) {
+          console.error('Service Worker Registration Failed:', error);
+        });
+    }
+  </script>
+</body>
+</html>
